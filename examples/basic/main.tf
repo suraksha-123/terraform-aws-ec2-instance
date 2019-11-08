@@ -1,5 +1,5 @@
 provider "aws" {
-  region = "eu-west-1"
+  region = "us-west-2"
 }
 
 ##################################################################
@@ -68,7 +68,7 @@ module "ec2" {
 
   name          = "example-normal"
   ami           = data.aws_ami.amazon_linux.id
-  instance_type = "c5.large"
+  instance_type = "t2.micro"
   subnet_id     = tolist(data.aws_subnet_ids.all.ids)[0]
   //  private_ips                 = ["172.31.32.5", "172.31.46.20"]
   vpc_security_group_ids      = [module.security_group.this_security_group_id]
@@ -120,7 +120,7 @@ module "ec2_with_t3_unlimited" {
 
   name                        = "example-t3-unlimited"
   ami                         = data.aws_ami.amazon_linux.id
-  instance_type               = "t3.large"
+  instance_type               = "t2.micro"
   cpu_credits                 = "unlimited"
   subnet_id                   = tolist(data.aws_subnet_ids.all.ids)[0]
   vpc_security_group_ids      = [module.security_group.this_security_group_id]
@@ -135,7 +135,7 @@ module "ec2_zero" {
 
   name                   = "example-zero"
   ami                    = data.aws_ami.amazon_linux.id
-  instance_type          = "c5.large"
+  instance_type          = "t2.micro"
   subnet_id              = tolist(data.aws_subnet_ids.all.ids)[0]
   vpc_security_group_ids = [module.security_group.this_security_group_id]
 }
